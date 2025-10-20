@@ -5,6 +5,8 @@
 @import '../node_modules/@swimlane/ngx-datatable/themes/dark.css';
 @import '../node_modules/@swimlane/ngx-datatable/themes/bootstrap.css';
 
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+
 .barraTituloCRUD {
     background: rgba(62, 5, 138);
     color: #fff;
