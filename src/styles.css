@@ -7,13 +7,23 @@
 
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons';
 
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
 .barraTituloCRUD {
     background: rgba(62, 5, 138);
     color: #fff;
     height: 75px;
-    text-align: center; /* Centrar horizontalmente */
-    display: flex; /* Utilizamos flexbox para centrar verticalmente */
-    justify-content: center; /* Centrar horizontalmente con flexbox */
-    align-items: center; /* Centrar verticalmente con flexbox */
-    width: 100%; /* Ancho completo */
+    text-align: center;
+    /* Centrar horizontalmente */
+    display: flex;
+    /* Utilizamos flexbox para centrar verticalmente */
+    justify-content: center;
+    /* Centrar horizontalmente con flexbox */
+    align-items: center;
+    /* Centrar verticalmente con flexbox */
+    width: 100%;
+    /* Ancho completo */
 }

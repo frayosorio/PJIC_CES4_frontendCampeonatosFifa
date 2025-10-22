@@ -16,4 +16,8 @@ export class AutorizacionService {
   obtenerToken(): string | null {
     return localStorage.getItem(this.TOKEN_KEY);
   }
+
+  cerrarSesion(): void {
+    localStorage.removeItem(this.TOKEN_KEY);
+  }
 }

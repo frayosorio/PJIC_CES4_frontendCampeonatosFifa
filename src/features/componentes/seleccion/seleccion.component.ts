@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReferenciasMaterialModule } from '../../../shared/modulos/referencias-material.module';
-import { NgxDatatableModule } from "@swimlane/ngx-datatable";
+import { ColumnMode, NgxDatatableModule } from "@swimlane/ngx-datatable";
 import { Seleccion } from '../../../shared/entidades/seleccion';
 import { SeleccionService } from '../../../core/servicios/seleccion.service';
 
@@ -21,6 +21,8 @@ export class SeleccionComponent implements OnInit {
     { name: "Nombre de la Selección", prop: "nombre" },
     { name: "Entidad regente del Fútbol", prop: "entidad" }
   ];
+
+  public  modoColumna = ColumnMode;
 
   constructor(private seleccionServicio: SeleccionService) {
 

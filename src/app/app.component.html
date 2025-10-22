@@ -3,7 +3,7 @@
   <div class="centrar">
     Campeonatos FIFA
   </div>
-  <div>
+  <div *ngIf="usuarioActual==null">
     <button mat-raised-button (click)="login()">
       <mat-icon>person</mat-icon>
       Login
