@@ -14,7 +14,7 @@ import { NgIf } from '@angular/common';
     RouterOutlet,
     ReferenciasMaterialModule,
     NgIf
-],
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -42,15 +42,20 @@ export class AppComponent {
 
     cuadroDialogo.afterClosed().subscribe({
       next: datos => {
-        this.usuarioServicio.login(datos.usuario, datos.clave).subscribe({
-          next: response => {
-            this.autorizacionServicio.guardarToken(response.token);
-            this.usuarioActual = response.usuario;
-          },
-          error: error => {
-            window.alert(error.message);
-          }
-        });
+        if (datos) {
+          this.usuarioServicio.login(datos.usuario, datos.clave).subscribe({
+            next: response => {
+              this.autorizacionServicio.guardarToken(response.token);
+              this.usuarioActual = response.usuario;
+            },
+            error: error => {
+              window.alert(error.message);
+            }
+          });
+        }
+        else {
+          window.alert("El usuario canceló el LOGIN");
+        }
       },
       error: error => {
         window.alert(error);
