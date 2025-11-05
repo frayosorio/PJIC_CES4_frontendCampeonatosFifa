@@ -6,6 +6,7 @@ import { SeleccionService } from '../../../core/servicios/seleccion.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SeleccionEditarComponent } from '../seleccion-editar/seleccion-editar.component';
 import { FormsModule } from '@angular/forms';
+import { DecidirComponent } from '../../../shared/componentes/decidir/decidir.component';
 
 @Component({
   selector: 'app-seleccion',
@@ -89,7 +90,8 @@ export class SeleccionComponent implements OnInit {
           nombre: "",
           entidad: "",
         }
-      }
+      },
+      disableClose: true,
     });
 
     cuadroDialogo.afterClosed().subscribe({
@@ -129,7 +131,8 @@ export class SeleccionComponent implements OnInit {
         data: {
           encabezado: `Modificando la Selección de Fútbol [${this.seleccionEscogida?.nombre}]`,
           seleccion: this.seleccionEscogida
-        }
+        },
+        disableClose: true,
       });
 
       cuadroDialogo.afterClosed().subscribe({
@@ -161,6 +164,46 @@ export class SeleccionComponent implements OnInit {
   }
 
   eliminar() {
+    if (this.seleccionEscogida) {
+      const cuadroDialogo = this.dialogoServicio.open(DecidirComponent, {
+        width: "300px",
+        height: "200px",
+        data: {
+          encabezado: `Está seguro de eliminar la Selección de Fútbol [${this.seleccionEscogida?.nombre}] ?`,
+          id: this.seleccionEscogida.id,
+        },
+        disableClose: true,
+      });
 
+      cuadroDialogo.afterClosed().subscribe({
+        next: datos => {
+          if (datos) {
+            this.seleccionServicio.eliminar(datos.id).subscribe({
+              next: response => {
+                if (response) {
+                  this.selecciones.splice(this.indiceSeleccionEscogida, 1);
+                  window.alert("La Selección de Fútbol fue retirada con éxito");
+                }
+                else {
+                  window.alert("No se puede eliminar la Selección de Fútbol");
+                }
+              },
+              error: error => {
+                window.alert(error.message);
+              }
+            });
+          }
+          else {
+            window.alert("El usuario canceló ELIMINAR SELECCION");
+          }
+        },
+        error: error => {
+          window.alert(error);
+        }
+      });
+    }
+    else {
+      window.alert("Se debe escoger la Selección de Fútbol a eliminar");
+    }
   }
 }
