@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Campeonato } from '../../../shared/entidades/campeonato';
 import { ColumnMode, NgxDatatableModule, SelectionType } from '@swimlane/ngx-datatable';
 import { CampeonatoService } from '../../../core/servicios/campeonato.service';
@@ -20,7 +20,7 @@ import { Seleccion } from '../../../shared/entidades/seleccion';
   templateUrl: './campeonato.component.html',
   styleUrl: './campeonato.component.css'
 })
-export class CampeonatoComponent {
+export class CampeonatoComponent implements OnInit {
 
   public campeonatos: Campeonato[] = [];
   public paises: Seleccion[] = [];
