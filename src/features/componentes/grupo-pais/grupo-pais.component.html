@@ -7,9 +7,16 @@
         [selectionType]="tipoSeleccion.single" (activate)="escoger($event)"
         ></ngx-datatable>
 
-
+    <mat-form-field appearance="fill" style="width: 50%;">
+        <mat-label>Selección a agregar</mat-label>
+        <mat-select [(value)]="seleccionEscogida">
+            <mat-option *ngFor="let seleccion of datos.selecciones" [value]="seleccion">
+                {{seleccion.nombre }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
     <button mat-raised-button color="primary" (click)="agregar()">Agregar</button>
 </div>
 <div mat-dialog-actions>
-    <button mat-stroked-button color="primary" [mat-dialog-close]="null">Cerrar</button>
+    <button mat-stroked-button color="primary" [mat-dialog-close]="datos.seleccionesGrupo">Cerrar</button>
 </div>

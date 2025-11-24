@@ -11,6 +11,7 @@ import { Grupo } from '../../../shared/entidades/grupo';
 import { SeleccionService } from '../../../core/servicios/seleccion.service';
 import { Seleccion } from '../../../shared/entidades/seleccion';
 import { GrupoPaisComponent } from '../grupo-pais/grupo-pais.component';
+import { GrupoPais } from '../../../shared/entidades/grupo-pais';
 
 @Component({
   selector: 'app-grupo',
@@ -133,6 +134,12 @@ export class GrupoComponent implements OnInit {
               grupo: this.grupoEscogido,
             }
           });
+
+          cuadroDialogo.afterClosed().subscribe(
+            seleccionesGrupo => {
+              this.grupoEscogido!.paises = seleccionesGrupo.map((grupoPais: GrupoPais) => grupoPais.pais.nombre).join(", ");
+            }
+          );
         },
         error: error => {
           window.alert(error.message);

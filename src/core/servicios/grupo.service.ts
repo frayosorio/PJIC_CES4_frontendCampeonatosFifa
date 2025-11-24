@@ -27,5 +27,11 @@ export class GrupoService {
     return this.http.get<GrupoPais[]>(`${this.url}listarpaises/${idGrupo}`);
   }
 
+  public agregarPais(grupoPais: GrupoPais): Observable<GrupoPais> {
+    return this.http.post<GrupoPais>(`${this.url}agregarpais`, grupoPais);
+  }
 
+  public eliminarPais(idGrupo: number, idPais: number): Observable<boolean> {
+    return this.http.delete<boolean>(`${this.url}eliminarpais/${idGrupo}/${idPais}`);
+  }
 }
