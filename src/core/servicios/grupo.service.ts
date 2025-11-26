@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { Grupo } from '../../shared/entidades/grupo';
 import { GrupoPais } from '../../shared/entidades/grupo-pais';
+import { PosicionesDto } from '../../shared/DTOs/posiciones.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -34,4 +35,11 @@ export class GrupoService {
   public eliminarPais(idGrupo: number, idPais: number): Observable<boolean> {
     return this.http.delete<boolean>(`${this.url}eliminarpais/${idGrupo}/${idPais}`);
   }
+
+  // ***** Posiciones *****
+  public listarPosiciones(idGrupo: number): Observable<PosicionesDto[]> {
+    return this.http.get<PosicionesDto[]>(`${this.url}posiciones/${idGrupo}`);
+
+  }
+
 }

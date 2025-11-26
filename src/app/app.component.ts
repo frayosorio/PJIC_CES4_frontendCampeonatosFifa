@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ReferenciasMaterialModule } from '../shared/modulos/referencias-material.module';
 import { MatDialog } from '@angular/material/dialog';
@@ -18,7 +18,7 @@ import { NgIf } from '@angular/common';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
 
   public usuarioActual: Usuario | null = null;
 
@@ -27,6 +27,9 @@ export class AppComponent {
     private autorizacionServicio: AutorizacionService
   ) {
 
+  }
+  ngOnInit(): void {
+    this.usuarioActual = this.autorizacionServicio.obtenerUsuario();
   }
 
 
@@ -46,6 +49,7 @@ export class AppComponent {
           this.usuarioServicio.login(datos.usuario, datos.clave).subscribe({
             next: response => {
               this.autorizacionServicio.guardarToken(response.token);
+              this.autorizacionServicio.guardarUsuario(response.usuario);
               this.usuarioActual = response.usuario;
             },
             error: error => {

@@ -12,6 +12,7 @@ import { SeleccionService } from '../../../core/servicios/seleccion.service';
 import { Seleccion } from '../../../shared/entidades/seleccion';
 import { GrupoPaisComponent } from '../grupo-pais/grupo-pais.component';
 import { GrupoPais } from '../../../shared/entidades/grupo-pais';
+import { GrupoPosicionesComponent } from '../grupo-posiciones/grupo-posiciones.component';
 
 @Component({
   selector: 'app-grupo',
@@ -156,6 +157,29 @@ export class GrupoComponent implements OnInit {
   }
 
   posicionesGrupo() {
+    if (this.grupoEscogido) {
+      this.grupoServicio.listarPosiciones(this.grupoEscogido.id).subscribe({
+        next: response => {
+          this.dialogServicio.open(GrupoPosicionesComponent, {
+            width: "600px",
+            height: "400px",
+            data: {
+              encabezado: `Tabla de Posiciones del Grupo [${this.grupoEscogido?.nombre}]`,
+              posiciones: response
+            }
+          });
+        },
+        error: error => {
+          window.alert(error.message);
+        }
+
+      });
+
+
+    }
+    else {
+      window.alert("Se debe elegir un Grupo de la lista");
+    }
 
   }
 
