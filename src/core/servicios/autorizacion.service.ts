@@ -11,6 +11,7 @@ export class AutorizacionService {
 
   constructor() { }
 
+
   guardarToken(token: string) {
     localStorage.setItem(this.TOKEN_KEY, token);
   }

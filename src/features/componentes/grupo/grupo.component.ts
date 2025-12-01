@@ -13,6 +13,8 @@ import { Seleccion } from '../../../shared/entidades/seleccion';
 import { GrupoPaisComponent } from '../grupo-pais/grupo-pais.component';
 import { GrupoPais } from '../../../shared/entidades/grupo-pais';
 import { GrupoPosicionesComponent } from '../grupo-posiciones/grupo-posiciones.component';
+import { EncuentroService } from '../../../core/servicios/encuentro.service';
+import { GrupoEncuentroComponent } from '../grupo-encuentro/grupo-encuentro.component';
 
 @Component({
   selector: 'app-grupo',
@@ -44,6 +46,7 @@ export class GrupoComponent implements OnInit {
   constructor(private grupoServicio: GrupoService,
     private campeonatoServicio: CampeonatoService,
     private seleccionServicio: SeleccionService,
+    private encuentroServicio: EncuentroService,
     public dialogServicio: MatDialog,
   ) { }
 
@@ -153,7 +156,29 @@ export class GrupoComponent implements OnInit {
   }
 
   encuentrosGrupo() {
+    if (this.grupoEscogido) {
+      this.encuentroServicio.listarGrupo(this.grupoEscogido.id).subscribe({
+        next: response => {
+          this.dialogServicio.open(GrupoEncuentroComponent, {
+            width: "600px",
+            height: "400px",
+            data: {
+              encabezado: `Encuentros del Grupo [${this.grupoEscogido?.nombre}]`,
+              encuentros: response
+            }
+          });
+        },
+        error: error => {
+          window.alert(error.message);
+        }
 
+      });
+
+
+    }
+    else {
+      window.alert("Se debe elegir un Grupo de la lista");
+    }
   }
 
   posicionesGrupo() {
