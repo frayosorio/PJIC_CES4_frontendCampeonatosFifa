@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { ReferenciasMaterialModule } from '../shared/modulos/referencias-material.module';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../features/componentes/login/login.component';
 import { UsuarioService } from '../core/servicios/usuario.service';
 import { AutorizacionService } from '../core/servicios/autorizacion.service';
 import { Usuario } from '../shared/entidades/usuario';
-import { NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { RUTA_DEFAULT } from './app.routes';
 
 @Component({
@@ -14,12 +14,21 @@ import { RUTA_DEFAULT } from './app.routes';
   imports: [
     RouterOutlet,
     ReferenciasMaterialModule,
-    NgIf
+    NgIf,
+    NgFor,
+    RouterModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
+
+  public opciones = [
+    { titulo: "Selecciones", ruta: "selecciones", icono: "iconos/Seleccion.png" },
+    { titulo: "Campeonatos", ruta: "campeonatos", icono: "iconos/Campeonato.png" },
+    { titulo: "Grupos", ruta: "grupos", icono: "iconos/Grupo.png" },
+    { titulo: "Encuentros", ruta: "encuentros", icono: "iconos/Encuentro.png" },
+  ];
 
   public usuarioActual: Usuario | null = null;
 

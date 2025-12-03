@@ -1,20 +1,37 @@
-<mat-toolbar>
-  <img src="imagenes/Logo FIFA.jpg" height="80px">
-  <div class="centrar">
-    Campeonatos FIFA
-  </div>
-  <div *ngIf="usuarioActual==null">
-    <button mat-raised-button (click)="login()">
-      <mat-icon>person</mat-icon>
-      Login
-    </button>
-  </div>
-  <div *ngIf="usuarioActual!=null">
-    {{usuarioActual!.nombre}}
-    <button mat-raised-button (click)="logout()">
-      <mat-icon>closed</mat-icon>
-      Log out
-    </button>
-  </div>
-</mat-toolbar>
-<router-outlet></router-outlet>
+<mat-sidenav-container>
+  <mat-sidenav #menuLateral>
+    <mat-nav-list>
+      <div *ngFor="let opcion of opciones">
+          <button mat-icon-button [routerLink]="opcion.ruta" (click)="menuLateral.toggle()" class="menu-boton">
+            <img [src]="opcion.icono">
+            {{ opcion.titulo}}
+          </button>
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar>
+      <button *ngIf="usuarioActual" mat-icon-button (click)="menuLateral.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <img src="imagenes/Logo FIFA.jpg" height="80px">
+      <div class="centrar">
+        Campeonatos FIFA
+      </div>
+      <div *ngIf="usuarioActual==null">
+        <button mat-raised-button (click)="login()">
+          <mat-icon>person</mat-icon>
+          Login
+        </button>
+      </div>
+      <div *ngIf="usuarioActual!=null">
+        {{usuarioActual!.nombre}}
+        <button mat-raised-button (click)="logout()">
+          <mat-icon>closed</mat-icon>
+          Log out
+        </button>
+      </div>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
